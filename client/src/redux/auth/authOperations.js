@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authActions from './authActions';
 
-axios.defaults.baseURL = 'http://localhost:8080/';
+axios.defaults.baseURL = 'https://daikiri-phonebook-app.herokuapp.com/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const token = {
