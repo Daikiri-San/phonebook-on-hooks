@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authActions from './authActions';
 
-axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com/';
+axios.defaults.baseURL = 'http://localhost:8080/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const token = {
@@ -17,7 +17,7 @@ const register = credentials => dispatch => {
   dispatch(authActions.registerRequest());
 
   axios
-    .post('/users/signup', credentials)
+    .post('/auth/signup', credentials)
     .then(({ data }) => {
       token.set(data.token);
       dispatch(authActions.registerSuccess(data));
@@ -29,10 +29,10 @@ const logIn = credentials => dispatch => {
   dispatch(authActions.loginRequest());
 
   axios
-    .post('/users/login', credentials)
-    .then(response => {
-      token.set(response.data.token);
-      dispatch(authActions.loginSuccess(response.data));
+    .post('/auth/login', credentials)
+    .then(({ data }) => {
+      token.set(data.token);
+      dispatch(authActions.loginSuccess(data));
     })
     .catch(({ message }) => dispatch(authActions.loginError(message)));
 };
@@ -50,7 +50,7 @@ const getCurrentUser = () => (dispatch, getState) => {
   dispatch(authActions.getCurrentUserRequest());
 
   axios
-    .get('/users/current')
+    .get('/auth/current')
     .then(({ data }) => dispatch(authActions.getCurrentUserSuccess(data)))
     .catch(({ message }) => authActions.getCurrentUserError(message));
 };
@@ -59,7 +59,7 @@ const logOut = () => dispatch => {
   dispatch(authActions.logoutRequest());
 
   axios
-    .post('/users/logout')
+    .patch('/auth/logout')
     .then(() => {
       token.unset();
       dispatch(authActions.logoutSuccess());
@@ -71,7 +71,7 @@ const deleteCurrentUser = () => dispatch => {
   dispatch(authActions.deleteCurrentUserRequest());
 
   axios
-    .delete('/users/current')
+    .delete('/auth/current')
     .then(({ data }) => {
       token.unset();
       dispatch(authActions.deleteCurrentUserSuccess(data));

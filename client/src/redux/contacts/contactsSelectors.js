@@ -16,16 +16,10 @@ const getVisibleContacts = createSelector(
   },
 );
 
-const getTaskById = createSelector(
-  [(state, contactId) => contactId, getContacts],
-  (contactId, contacts) => contacts.find(({ id }) => id === contactId),
-);
-
 export default {
   getLoading,
   getContacts,
   getFilter,
   getError,
   getVisibleContacts,
-  getTaskById,
 };

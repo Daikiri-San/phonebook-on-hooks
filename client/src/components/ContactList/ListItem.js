@@ -81,17 +81,9 @@ const Button = styled.button`
   }
 `;
 
-function ListItem({ contact, onRemoveContact, theme }) {
-  const name = contact ? contact.name : '';
-  const number = contact ? contact.number : '';
-  let viewName;
-  let viewNumber;
-  if (name) {
-    viewName = name.length > 12 ? `${name.slice(0, 12)}...` : name;
-  }
-  if (number) {
-    viewNumber = number.length > 17 ? `${number.slice(0, 17)}...` : number;
-  }
+function ListItem({ name, phone, onRemoveContact, theme }) {
+  const viewName = name.length > 12 ? `${name.slice(0, 12)}...` : name;
+  const viewNumber = phone.length > 17 ? `${phone.slice(0, 17)}...` : phone;
 
   return (
     <Item shadow={theme.config.mainShadowBox}>

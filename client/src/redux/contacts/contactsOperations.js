@@ -12,12 +12,16 @@ const fetchExistContacts = () => dispatch => {
     .catch(error => dispatch(contactsActions.fetchExistContactsError(error)));
 };
 
-const addContact = ({ name, number }) => dispatch => {
+const addContact = ({ name, phone }) => dispatch => {
   dispatch(contactsActions.addContactRequest());
 
   axios
-    .post('/contacts', { name, number })
-    .then(({ data }) => dispatch(contactsActions.addContactSuccess(data)))
+    .post('/contacts', { name, phone })
+    .then(({ data }) => {
+      setTimeout(() => {
+        dispatch(contactsActions.addContactSuccess(data));
+      }, 300);
+    })
     .catch(error => dispatch(contactsActions.addContactError(error)));
 };
 

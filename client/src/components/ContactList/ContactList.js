@@ -41,15 +41,18 @@ function ContactList({ contacts, visibleContacts }) {
             appear
           >
             <TransitionGroup component={List}>
-              {visibleContacts.map(({ id }) => (
-                <CSSTransition
-                  key={id}
-                  timeout={250}
-                  classNames={slideItemTransition}
-                >
-                  <ListItem id={id} />
-                </CSSTransition>
-              ))}
+              {visibleContacts.map(({ _id }) => {
+                console.log(_id);
+                return (
+                  <CSSTransition
+                    key={_id}
+                    timeout={250}
+                    classNames={slideItemTransition}
+                  >
+                    <ListItem id={_id} />
+                  </CSSTransition>
+                );
+              })}
             </TransitionGroup>
           </CSSTransition>
           {contacts.length === 0 && (
@@ -68,13 +71,13 @@ function ContactList({ contacts, visibleContacts }) {
             appear
           >
             <TransitionGroup component={List}>
-              {visibleContacts.map(({ id }) => (
+              {visibleContacts.map(({ _id, name, phone }) => (
                 <CSSTransition
-                  key={id}
+                  key={_id}
                   timeout={250}
                   classNames={slideItemTransition}
                 >
-                  <ListItem id={id} />
+                  <ListItem id={_id} name={name} phone={phone} />
                 </CSSTransition>
               ))}
             </TransitionGroup>

@@ -10,7 +10,7 @@ function ContactFormContainer() {
   const [apearNotice, setApearNotice] = useState(false);
   const [notice, setNotice] = useState(null);
 
-  const addContact = (name, number) => {
+  const addContact = (name, phone) => {
     const checkedForName = contacts.find(contact => name === contact.name);
     if (checkedForName) {
       setNotice(`${name} is already in contacts`);
@@ -21,9 +21,9 @@ function ContactFormContainer() {
     }
 
     const numberCheck = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/g;
-    const checkedNumber = numberCheck.test(number);
+    const checkedNumber = numberCheck.test(phone);
     if (!checkedNumber) {
-      setNotice('Hey! This is not a real number :)');
+      setNotice('Hey! This is not a real phone number :)');
       setApearNotice(true);
       setTimeout(() => setApearNotice(false), 2600);
 
@@ -31,7 +31,7 @@ function ContactFormContainer() {
     }
     const newContact = {
       name,
-      number,
+      phone,
     };
     dispatch(contactsOperations.addContact(newContact));
   };

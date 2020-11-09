@@ -10,9 +10,9 @@ function ContactsPage() {
   const isLoadingContacts = useSelector(contactsSelectors.getLoading);
   const dispatch = useDispatch();
 
-  useEffect(() => dispatch(contactsOperations.fetchExistContacts()), [
-    dispatch,
-  ]);
+  useEffect(() => {
+    dispatch(contactsOperations.fetchExistContacts());
+  }, [dispatch]);
 
   return (
     <>

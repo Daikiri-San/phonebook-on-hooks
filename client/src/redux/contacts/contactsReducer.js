@@ -2,10 +2,10 @@ import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import contactsActions from './contactsActions';
 
-const fetchExist = (state, { payload }) => payload;
+const fetchExist = (_, { payload }) => payload;
 const addNewContact = (state, { payload }) => [...state, payload];
 const removeContact = (state, { payload }) =>
-  state.filter(({ id }) => id !== payload);
+  state.filter(({ _id }) => _id !== payload);
 
 const items = createReducer([], {
   [contactsActions.fetchExistContactsSuccess]: fetchExist,
@@ -14,7 +14,7 @@ const items = createReducer([], {
 });
 
 const filter = createReducer('', {
-  [contactsActions.changeFilter]: (state, { payload }) => payload,
+  [contactsActions.changeFilter]: (_, { payload }) => payload,
 });
 
 const loading = createReducer(false, {
