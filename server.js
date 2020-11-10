@@ -32,10 +32,7 @@ class Server {
     this.server.use(cors());
     this.server.use(morgan("tiny"));
     if (process.env.NODE_ENV === "production") {
-      this.server.use(
-        "/",
-        express.static(path.join(__dirname, "client", "build"))
-      );
+      this.server.use(express.static(path.join(__dirname, "client", "build")));
     }
   }
 
