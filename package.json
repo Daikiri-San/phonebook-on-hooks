@@ -7,7 +7,7 @@
     "client": "npm run start --prefix client",
     "client:build": "npm run build --prefix client",
     "client:install": "npm install --prefix client",
-    "heroku-postbuild": "npm run client:install && client:build",
+    "heroku-postbuild": "npm run client:install && npm run client:build",
     "start": "cross-env NODE_ENV=production node server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon server.js"
   },
