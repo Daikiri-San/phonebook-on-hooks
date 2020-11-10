@@ -31,25 +31,22 @@ class Server {
     this.server.use(express.json({ extended: true }));
     this.server.use(cors());
     this.server.use(morgan("tiny"));
-    if (process.env.NODE_ENV === "production") {
-      this.server.use(
-        "/",
-        express.static(path.join(__dirname, "client", "build"))
-      );
-      this.server.use(
-        "/profile",
-        express.static(path.join(__dirname, "client", "build"))
-      );
-      this.server.use(
-        "/contacts",
-        express.static(path.join(__dirname, "client", "build"))
-      );
-    }
   }
 
   initRoutes() {
     this.server.use("/contacts", contactsRouter);
     this.server.use("/auth", authRouter);
+
+    if (process.env.NODE_ENV === "production") {
+      this.server.use(
+        "/",
+        express.static(path.join(__dirname, "client", "build"))
+      );
+
+      this.server.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+      });
+    }
   }
 
   handleErrors() {
