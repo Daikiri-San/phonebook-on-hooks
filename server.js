@@ -30,7 +30,7 @@ class Server {
 
   initMiddlewares() {
     this.server.use(express.json({ extended: true }));
-    this.server.use(cors({ origin: FRONTEND_URL }));
+    this.server.use(cors());
     this.server.use(morgan("tiny"));
     if (process.env.NODE_ENV === "production") {
       this.server.use(
