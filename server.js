@@ -8,7 +8,6 @@ const { contactsRouter } = require("./contacts/contacts.router");
 const { authRouter } = require("./auth/auth.router");
 
 const PORT = process.env.PORT || 8080;
-const FRONTEND_URL = "http://localhost:3000";
 
 class Server {
   constructor() {
