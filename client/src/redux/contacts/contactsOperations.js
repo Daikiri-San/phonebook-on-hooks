@@ -5,7 +5,7 @@ const fetchExistContacts = () => dispatch => {
   dispatch(contactsActions.fetchExistContactsRequest());
 
   axios
-    .get('/contacts')
+    .get('/userContacts')
     .then(({ data }) =>
       dispatch(contactsActions.fetchExistContactsSuccess(data)),
     )
@@ -16,7 +16,7 @@ const addContact = ({ name, phone }) => dispatch => {
   dispatch(contactsActions.addContactRequest());
 
   axios
-    .post('/contacts', { name, phone })
+    .post('/userContacts', { name, phone })
     .then(({ data }) => {
       setTimeout(() => {
         dispatch(contactsActions.addContactSuccess(data));
@@ -29,7 +29,7 @@ const removeContact = id => dispatch => {
   dispatch(contactsActions.removeContactRequest());
 
   axios
-    .delete(`/contacts/${id}`)
+    .delete(`/userContacts/${id}`)
     .then(() => dispatch(contactsActions.removeContactSuccess(id)))
     .catch(error =>
       dispatch(contactsActions.removeContactError(error.message)),

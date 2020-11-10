@@ -34,7 +34,7 @@ class Server {
   }
 
   initRoutes() {
-    this.server.use("/contacts", contactsRouter);
+    this.server.use("/userContacts", contactsRouter);
     this.server.use("/auth", authRouter);
 
     if (process.env.NODE_ENV === "production") {
