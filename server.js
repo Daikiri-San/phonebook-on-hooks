@@ -1,3 +1,5 @@
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
@@ -27,11 +29,18 @@ class Server {
   }
 
   initMiddlewares() {
-    this.server.use(express.json());
+    this.server.use(express.json({ extended: true }));
     this.server.use(cors({ origin: FRONTEND_URL }));
     this.server.use(morgan("tiny"));
     if (process.env.NODE_ENV === "production") {
-      this.server.use(express.static("client/build"));
+      this.server.use(
+        "/",
+        express.static(path.join(__dirname, "client", "build"))
+      );
+
+      app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+      });
     }
   }
 
@@ -70,6 +79,6 @@ class Server {
   }
 }
 
-module.exports = {
-  Server,
-};
+const app = new Server();
+
+app.start();
