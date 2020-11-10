@@ -9,9 +9,9 @@ const getVisibleContacts = createSelector(
   [getContacts, getFilter],
   (contacts, filter) => {
     return contacts.filter(
-      ({ name, number }) =>
+      ({ name, phone }) =>
         name.toLowerCase().includes(filter.toLowerCase()) ||
-        number.includes(filter),
+        phone.includes(filter),
     );
   },
 );
